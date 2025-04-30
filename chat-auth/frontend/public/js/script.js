@@ -22,12 +22,12 @@ form.addEventListener('submit', (e) => {
     e.preventDefault();
     if (input.value) {
         const clientOffset = `${socket.id}-${Date.now()}`;
-        socket.emit('chat message', input.value, clientOffset);
+        socket.emit('private message', input.value, clientOffset);
         input.value = '';
     }
 });
 
-socket.on('chat message', (msg, sender, time) => {
+socket.on('private message', (msg, sender, time) => {
     const item = document.createElement('li');
     item.innerHTML = `<strong>[${time}] ${sender}: </strong> ${msg}`;
     messages.appendChild(item);
@@ -44,14 +44,14 @@ socket.on('status message', (msg, color) => {
 toggleButton.addEventListener('click', (e) => {
     e.preventDefault();
     if (socket.connected) {
-        toggleButton.innerText = 'Connect';
+        toggleButton.innerText = 'Connecter';
         const item = document.createElement('li');
         item.textContent = "❌ Vous avez été déconnecté du serveur.";
         item.style.color = 'red';
         messages.appendChild(item);
-        socket.disconnect();    
+        socket.disconnect();
     } else {
-        toggleButton.innerText = 'Disconnect';
+        toggleButton.innerText = 'Déconnecter';
         socket.connect();
     }
 });
