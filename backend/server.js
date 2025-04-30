@@ -11,7 +11,6 @@ app.use(express.json());
 
 const SECRET_KEY = process.env.SECRET_KEY;
 
-// Inscription
 app.post('/register', async (req, res) => {
     const { email, password } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -24,7 +23,6 @@ app.post('/register', async (req, res) => {
     }
 });
 
-// Connexion
 app.post('/login', async (req, res) => {
     const { email, password } = req.body;
     const result = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
@@ -37,7 +35,6 @@ app.post('/login', async (req, res) => {
     res.json({ token });
 });
 
-// Middleware pour protéger les routes
 const authenticateToken = (req, res, next) => {
     const token = req.headers.authorization?.split(' ')[1];
 
@@ -50,7 +47,6 @@ const authenticateToken = (req, res, next) => {
     });
 };
 
-// Route protégée
 app.get('/profile', authenticateToken, async (req, res) => {
     const result = await pool.query("SELECT email FROM users WHERE id = $1", [req.userId]);
     res.json(result.rows[0]);
