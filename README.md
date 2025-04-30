@@ -15,7 +15,7 @@ L'application est constituée de deux parties principales :
 
 Frontend : Interface utilisateur développée avec Vue.js permettant la connexion via Google, l'affichage des utilisateurs connectés et une interface de chat.
 
-Backend : Serveur Node.js avec Express.js, Passport.js (Google Strategy), Socket.io pour le chat en temps réel, MongoDB pour le stockage des utilisateurs et messages, et Redis pour la mise en cache des sessions.
+Backend : Serveur Node.js avec Express.js, Passport.js (Google Strategy), Socket.io pour le chat en temps réel, MongoDB pour le stockage des utilisateurs et messages.
 ---
 
 ## ⚙️ Instructions d'exécution
@@ -57,8 +57,5 @@ MONGO_URI=
 GITHUB_CLIENT_ID=
 GITHUB_CLIENT_SECRET=
 GITHUB_CALLBACK_URL=
-REDIS_PORT=
-REDIS_HOST=
-# CLIENT_URL=
 FRONTEND_URL=
 ```
