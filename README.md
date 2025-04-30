@@ -36,6 +36,8 @@ npm install
 npm run serve
 ```
 
+Ouvrez un autre terminal et exécutez les commandes suivantes pour cloner le projet et installer les dépendances.
+
 ```bash
 cd backend
 npm install
