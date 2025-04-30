@@ -4,6 +4,7 @@ const cors = require('cors');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const pool = require('./db');
+const initDb = require('./initDb');
 
 const app = express();
 app.use(cors());
@@ -11,10 +12,12 @@ app.use(express.json());
 
 const SECRET_KEY = process.env.SECRET_KEY;
 
+initDb();
+
 app.post('/register', async (req, res) => {
     const { email, password } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
-
+    console.log(`Email: ${email}, Password: ${hashedPassword}`);
     try {
         await pool.query("INSERT INTO users (email, password) VALUES ($1, $2)", [email, hashedPassword]);
         res.json({ message: "Utilisateur créé !" });
