@@ -1,8 +1,14 @@
 <template>
   <div class="login-container">
     <h1>Connexion</h1>
-    <button @click="loginWithGoogle">Se connecter avec Google</button>
-    <button @click="loginWithGitHub">Se connecter avec GitHub</button>
+    <button class="login-button google" @click="loginWithGoogle">
+      <img src="https://www.pngkit.com/png/full/178-1783296_g-transparent-circle-google-logo.png" alt="Google Logo" />
+      Se connecter avec Google
+    </button>
+    <button class="login-button github" @click="loginWithGitHub">
+      <img src="https://static-00.iconduck.com/assets.00/github-icon-2048x2048-eyd5tyuo.png" alt="GitHub Logo" />
+      Se connecter avec GitHub
+    </button>
   </div>
 </template>
 
@@ -38,7 +44,7 @@ export default {
 
           const data = await res.json();
           if (data.user) {
-            this.$router.push('/chat');
+            window.location.reload();
           } else {
             alert('Connexion échouée');
           }
@@ -52,37 +58,70 @@ export default {
 <style scoped>
 .login-container {
   max-width: 400px;
-  margin: auto;
-  padding: 20px;
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  margin: 50px auto;
+  padding: 40px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   text-align: center;
-  margin: 100px auto;
-}
-
-.login-container:hover {
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-  transform: scale(1.02);
-  transition: all 0.3s ease-in-out;
-  cursor: pointer;
+  animation: fadeIn 0.5s ease-in-out;
 }
 
 h1 {
   color: #333;
+  margin-bottom: 30px;
+  font-size: 2em;
 }
 
-button {
-  padding: 10px 20px;
-  margin: 10px;
+.login-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 15px;
+  margin: 10px 0;
   border: none;
-  background: #42b983;
-  color: white;
-  border-radius: 4px;
+  border-radius: 24px;
   cursor: pointer;
+  transition: background 0.3s, transform 0.3s;
+  font-size: 1em;
+  font-weight: bold;
 }
 
-button:hover {
-  background: #1e724c;
+.login-button img {
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+}
+
+.login-button.google {
+  background: #4285f4;
+  color: white;
+}
+
+.login-button.google:hover {
+  background: #357ae8;
+  transform: translateY(-3px);
+}
+
+.login-button.github {
+  background: #24292e;
+  color: white;
+}
+
+.login-button.github:hover {
+  background: #1b1f23;
+  transform: translateY(-3px);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 </style>

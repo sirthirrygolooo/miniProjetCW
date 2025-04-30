@@ -14,6 +14,11 @@ const messageSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  clientOffset: {
+    type: Number,
+    default: () => Math.floor(Math.random() * 1000000),
+    unique: true,
+  },
 });
 
 const Message = mongoose.model('Message', messageSchema);

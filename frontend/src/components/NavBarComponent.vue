@@ -44,7 +44,8 @@ export default {
 nav {
   background-color: #333;
   padding: 1rem;
-  border-radius: 5px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   color: white;
 }
 
@@ -53,39 +54,43 @@ nav ul {
   padding: 0;
   display: flex;
   justify-content: space-around;
+  align-items: center;
 }
 
 nav li {
-  display: inline;
-  border-bottom: 3px solid white;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease, border-bottom 0.3s ease;
 }
 
 nav li:hover {
   background-color: #444;
-  border-radius: 4px;
-  border-bottom: 3px solid #ff4757;
-  transition: background-color 0.3s ease, border-bottom 0.3s ease;
-  cursor: pointer;
+  border-radius: 5px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
 nav a {
   color: white;
   text-decoration: none;
   font-weight: bold;
+  padding: 10px 0;
 }
 
 nav a:hover {
-  text-decoration: none;
-  background-color: transparent;
+  transform: scale(1.05);
+  transition: all 0.3s ease;
 }
 
 button {
-  padding: 5px 10px;
+  padding: 10px 20px;
   border: none;
   background: #ff4757;
   color: white;
-  border-radius: 4px;
+  border-radius: 24px;
   cursor: pointer;
+  transition: background 0.3s;
 }
 
 button:hover {

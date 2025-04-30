@@ -1,4 +1,4 @@
-# 📚 Mini-projet 2 : Authentification avec JWT
+# 📚 Mini-projet x : A COMPLETER
 
 ## 👥 Membres du groupe
 

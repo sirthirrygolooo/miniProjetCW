@@ -3,7 +3,9 @@
     <h1>Chat en temps réel</h1>
     <ul id="messages">
       <li v-for="msg in messages" :key="msg._id" class="message">
-        <strong>{{ msg.user.displayName }}:</strong> {{ msg.message }} <small>{{ msg.timestamp }}</small>
+        <strong v-if="msg.user && msg.user.displayName">{{ msg.user.displayName }} à <small>{{ formatTimestamp(msg.timestamp) }}</small> : </strong>
+        <span v-else>Utilisateur inconnu à <small>{{ formatTimestamp(msg.timestamp) }}</small> : </span>
+        {{ msg.message }}
       </li>
     </ul>
     <form id="form" @submit.prevent="sendMessage">
@@ -15,6 +17,7 @@
 
 <script>
 import io from 'socket.io-client';
+import moment from 'moment';
 
 export default {
   data() {
@@ -36,12 +39,30 @@ export default {
       });
     });
   },
+  mounted() {
+    this.fetchMessages();
+  },
   methods: {
+    async fetchMessages() {
+      try {
+        const response = await fetch('/api/messages', {
+          method: 'GET',
+          credentials: 'include',
+        });
+        const data = await response.json();
+        this.messages = data.messages;
+      } catch (error) {
+        console.error('Erreur lors de la récupération des messages:', error);
+      }
+    },
     sendMessage() {
       if (this.message.trim()) {
         this.socket.emit('chat message', this.message);
         this.message = '';
       }
+    },
+    formatTimestamp(timestamp) {
+      return moment(timestamp).format('HH:mm:ss');
     },
   },
 };
@@ -49,17 +70,20 @@ export default {
 
 <style scoped>
 .chat-container {
-  max-width: 600px;
-  margin: auto;
+  max-width: 800px;
+  margin: 20px auto;
   padding: 20px;
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
 }
 
 h1 {
   text-align: center;
   color: #333;
+  margin-bottom: 20px;
+  font-size: 2em;
 }
 
 #messages {
@@ -67,33 +91,56 @@ h1 {
   padding: 0;
   max-height: 400px;
   overflow-y: auto;
+  margin-bottom: 20px;
 }
 
 .message {
-  padding: 10px;
-  border-bottom: 1px solid #ddd;
+  padding: 15px;
+  border-bottom: 1px solid #e0e0e0;
+  display: flex;
+  flex-direction: column;
+}
+
+.message strong {
+  font-weight: bold;
+  color: #007bff;
+}
+
+.message span {
+  color: #777;
+}
+
+.message small {
+  color: #999;
+  margin-top: 5px;
+  font-size: 0.8em;
 }
 
 #form {
   display: flex;
-  margin-top: 20px;
+  background: #f9f9f9;
+  border-top: 1px solid #e0e0e0;
+  padding: 15px;
+  border-radius: 12px;
 }
 
 #input {
   flex: 1;
-  padding: 10px;
+  padding: 12px;
   border: 1px solid #ddd;
-  border-radius: 4px;
+  border-radius: 20px;
+  margin-right: 10px;
+  font-size: 1em;
 }
 
 button {
-  padding: 10px 20px;
-  margin-left: 10px;
+  padding: 12px 20px;
   border: none;
   background: #007bff;
   color: white;
-  border-radius: 4px;
+  border-radius: 20px;
   cursor: pointer;
+  transition: background 0.3s;
 }
 
 button:hover {
