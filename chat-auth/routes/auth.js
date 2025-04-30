@@ -17,10 +17,10 @@ router.get('/github/callback', passport.authenticate('github', {
 }));
 
 router.get('/logout', (req, res) => {
-  req.logout(err => {
-    if (err) return next(err);
-    res.redirect('/');
-  });
-});
+    req.logout((err) => {
+      if (err) return next(err);
+      res.redirect('/');
+    });
+});  
 
 module.exports = router;
