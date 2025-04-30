@@ -18,6 +18,7 @@
 <script>
 import io from 'socket.io-client';
 import moment from 'moment';
+const oof = new Audio(require('@/assets/oof.mp3'));
 
 export default {
   data() {
@@ -35,6 +36,7 @@ export default {
     this.socket.on('chat message', (data) => {
       this.messages = data.messages;
       this.$nextTick(() => {
+        oof.play()
         const container = this.$refs.messagesList;
         if (container) {
           container.scrollTop = container.scrollHeight;
