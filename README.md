@@ -24,7 +24,7 @@ Le projet est organisé en deux parties :
 
 ### 🔧 Prérequis
 
-- Node.js (version recommandée : 18+)
+- Node.js (version recommandée : 20+)
 - PostgreSQL (base de données locale)
 - Un gestionnaire de paquets : `npm` ou `yarn`
 
