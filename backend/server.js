@@ -70,6 +70,18 @@ io.on('connection', (socket) => {
 
   console.log(`WebSocket connecté: ${userId}`);
 
+  socket.on('get messages', async () => {
+    try {
+      const messages = await Message.find()
+        .populate('user', 'displayName')
+        .sort({ timestamp: 1 });
+
+      socket.emit('init messages', { messages });
+    } catch (err) {
+      console.error('Erreur lors de la récupération initiale des messages:', err);
+    }
+  });
+
   socket.on('chat message', async (msg) => {
     try {
       const newMessage = new Message({

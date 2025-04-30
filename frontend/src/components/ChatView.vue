@@ -3,8 +3,8 @@
     <h1>Chat en temps réel</h1>
     <ul id="messages">
       <li v-for="msg in messages" :key="msg._id" class="message">
-        <strong v-if="msg.user && msg.user.displayName">{{ msg.user.displayName }} à <small>{{ formatTimestamp(msg.timestamp) }}</small> : </strong>
-        <span v-else>Utilisateur inconnu à <small>{{ formatTimestamp(msg.timestamp) }}</small> : </span>
+        <strong v-if="msg.user && msg.user.displayName">{{ msg.user.displayName }} à <small>{{ formatTimestamp(msg.timestamp) }}</small> :</strong>
+        <span v-else>Utilisateur inconnu à <small>{{ formatTimestamp(msg.timestamp) }}</small> :</span>
         {{ msg.message }}
       </li>
     </ul>
@@ -32,7 +32,16 @@ export default {
       auth: { username: localStorage.getItem('username') || 'Anonyme' },
     });
 
+    // Réception des messages en temps réel
     this.socket.on('chat message', (data) => {
+      this.messages = data.messages;
+      this.$nextTick(() => {
+        window.scrollTo(0, document.body.scrollHeight);
+      });
+    });
+
+    // Réception initiale des messages
+    this.socket.on('init messages', (data) => {
       this.messages = data.messages;
       this.$nextTick(() => {
         window.scrollTo(0, document.body.scrollHeight);
@@ -43,13 +52,9 @@ export default {
     this.fetchMessages();
   },
   methods: {
-    async fetchMessages() {
-      try {
-        console.log('Récupération des messages...');
-        // marche paaaaas
-      } catch (error) {
-        console.error('Erreur lors de la récupération des messages:', error);
-      }
+    fetchMessages() {
+      console.log('Demande des messages au serveur...');
+      this.socket.emit('get messages');
     },
     sendMessage() {
       if (this.message.trim()) {
