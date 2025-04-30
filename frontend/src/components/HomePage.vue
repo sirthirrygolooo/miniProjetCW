@@ -1,12 +1,10 @@
 <template>
   <div class="home">
-    <h1>Bienvenue sur le Chat en temps réel</h1>
-    <!-- Message si l'utilisateur n'est pas connecté -->
+    <h1>Bienvenue !</h1>
     <p v-if="!user">
       Pour discuter, veuillez vous
       <router-link to="/login">connecter</router-link>.
     </p>
-    <!-- Message si l'utilisateur est connecté -->
     <p v-else>
       Bienvenue, {{ user.username }}! <br />
       Vous êtes connecté. <br />
@@ -39,7 +37,6 @@ export default {
         }
       } catch (error) {
         console.error('Erreur lors de la vérification de l\'utilisateur:', error);
-        // Optionnellement, tu peux gérer une erreur ici si besoin.
       }
     },
   },
@@ -61,13 +58,15 @@ p {
   font-size: 1.2em;
 }
 
-router-link {
+a {
   color: #42b983;
   text-decoration: none;
   font-weight: bold;
 }
 
-router-link:hover {
-  text-decoration: underline;
+a:hover {
+  color: #1e724c;
+  transition: color 0.5s ease;
+  cursor: pointer;
 }
 </style>
