@@ -41,6 +41,16 @@ export default {
   box-sizing: border-box;
 }
 
+#app {
+  height: 100vh;
+  background: url('@/assets/peepo.jpg') no-repeat center center fixed;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #E0E0E0; 
+}
+
 body {
   font-family: Arial, sans-serif;
   background: url('@/assets/peepo.jpg') no-repeat center center fixed;
@@ -72,16 +82,6 @@ button:hover {
   background-color: #7B1FA2;
 }
 
-#app {
-  width: 100%;
-  max-width: 400px;
-  padding: 20px;
-  background-color: #1E1E1E;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 
 .big-names h2 {
   font-size: 32px;
