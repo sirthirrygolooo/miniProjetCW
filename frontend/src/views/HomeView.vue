@@ -1,7 +1,6 @@
 <template>
   <div class="home">
     <HomePage></HomePage>
-    <p class="nosNoms">GENITRINI James ∘ FROEHLY Jean-Baptiste</p>
   </div>
 </template>
 
