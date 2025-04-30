@@ -11,7 +11,7 @@ router.get('/google/callback', passport.authenticate('google', { failureRedirect
 router.get('/github', passport.authenticate('github', { scope: ['user:email'] }));
 
 router.get('/github/callback', passport.authenticate('github', { failureRedirect: '/auth/failure' }), (req, res) => {
-  res.json({ user: req.user });
+  res.redirect('/auth/success');
 });
 
 router.get('/logout', (req, res, next) => {
