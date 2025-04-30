@@ -11,9 +11,9 @@ Vous êtes actuellement sur la branche `main`, qui sert uniquement de point d'en
 
 | Branche | Description |
 |--------|-------------|
-| [`miniProjet1`] | Authentification classique avec sessions et cookies |
-| [`miniProjet2`] | Authentification JWT + refresh token avec API sécurisée |
-| [`miniProjet3`] | Authentification OAuth2 (Google + autre) et chat en temps réel |
+| [`MiniProjet1`] | Authentification classique avec sessions et cookies |
+| [`MiniProjet2`] | Authentification JWT + refresh token avec API sécurisée |
+| [`MiniProjet3`] | Authentification OAuth2 (Google + autre) et chat en temps réel |
 
 ---
 
