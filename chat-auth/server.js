@@ -31,7 +31,7 @@ app.use('/auth', authRoutes);
 
 app.get('/', (req, res) => {
     if (req.user) {
-      res.send(`Hello, ${req.user.displayName} <a href="/auth/logout">Logout</a>`);
+      res.send(`Hello, ${req.user} <a href="/auth/logout">Logout</a>`);
     } else {
       res.send('Not logged in <a href="/auth/google">Login with Google</a> <a href="/auth/github">Login with GitHub</a>');
     }
