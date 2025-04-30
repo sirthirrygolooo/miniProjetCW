@@ -1,7 +1,7 @@
 <template>
   <div class="chat-container">
     <h1>Chat en temps réel</h1>
-    <ul id="messages">
+    <ul id="messages" ref="messagesList">
       <li v-for="msg in messages" :key="msg._id" class="message">
         <strong v-if="msg.user && msg.user.displayName">{{ msg.user.displayName }} à <small>{{ formatTimestamp(msg.timestamp) }}</small> :</strong>
         <span v-else>Utilisateur inconnu à <small>{{ formatTimestamp(msg.timestamp) }}</small> :</span>
@@ -32,20 +32,26 @@ export default {
       auth: { username: localStorage.getItem('username') || 'Anonyme' },
     });
 
-    // Réception des messages en temps réel
     this.socket.on('chat message', (data) => {
       this.messages = data.messages;
       this.$nextTick(() => {
-        window.scrollTo(0, document.body.scrollHeight);
+        const container = this.$refs.messagesList;
+        if (container) {
+          container.scrollTop = container.scrollHeight;
+        }
       });
+
     });
 
-    // Réception initiale des messages
     this.socket.on('init messages', (data) => {
       this.messages = data.messages;
       this.$nextTick(() => {
-        window.scrollTo(0, document.body.scrollHeight);
+        const container = this.$refs.messagesList;
+        if (container) {
+          container.scrollTop = container.scrollHeight;
+        }
       });
+
     });
   },
   mounted() {
