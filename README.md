@@ -51,7 +51,7 @@ Créer un fichier .env dans le dossier backend avec les variables d'environnemen
 ```env
 GOOGLE_CLIENT_ID=
 GOOGLE_CLIENT_SECRET=
-GOOGLE_CALLBACK_URL=http://localhost:3000/auth/google/callback
+GOOGLE_CALLBACK_URL=
 SESSION_SECRET=
 MONGO_URI=
 GITHUB_CLIENT_ID=
