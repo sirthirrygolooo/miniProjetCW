@@ -1,4 +1,4 @@
-# 📚 Mini-projet x : A COMPLETER
+# 📚 Mini-projet 3 : Authentification OAuth2 avec Google et Chat en temps réel
 
 ## 👥 Membres du groupe
 
@@ -9,15 +9,13 @@
 
 ## 📝 Description du projet
 
-Ce projet a pour objectif de mettre en place une **authentification basée sur JSON Web Tokens (JWT)** pour sécuriser une application web. L'application comprend un backend en **Node.js** avec **Express.js** et un frontend en **Vue.js**. 
+Ce projet vise à implémenter une authentification OAuth2 via Google et à intégrer un système de messagerie instantanée en temps réel entre utilisateurs connectés.
 
-L'authentification JWT permet aux utilisateurs de se connecter, de recevoir un token, et d'accéder à des pages sécurisées via une gestion du token côté client (stocké dans `LocalStorage` ou `SessionStorage`).
+L'application est constituée de deux parties principales :
 
-Le projet est organisé en deux parties :
+Frontend : Interface utilisateur développée avec Vue.js permettant la connexion via Google, l'affichage des utilisateurs connectés et une interface de chat.
 
-- **Frontend** : Interface utilisateur développée avec **Vue.js** pour l'inscription, la connexion et l'affichage d'une page sécurisée.
-- **Backend** : Serveur **Node.js** avec **Express.js** pour la gestion des utilisateurs, la génération et la validation des JWT, et la gestion de la base de données avec **Sequelize ORM**.
-
+Backend : Serveur Node.js avec Express.js, Passport.js (Google Strategy), Socket.io pour le chat en temps réel, MongoDB pour le stockage des utilisateurs et messages, et Redis pour la mise en cache des sessions.
 ---
 
 ## ⚙️ Instructions d'exécution
@@ -51,12 +49,16 @@ npm start
 Créer un fichier .env dans le dossier backend avec les variables d'environnement suivantes :
 
 ```env
-DB_NAME=
-DB_USER=
-DB_PASSWORD=
-DB_HOST=
-DB_DIALECT=
-DB_LOGGING=
-
-SECRET_KEY=
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+GOOGLE_CALLBACK_URL=http://localhost:3000/auth/google/callback
+SESSION_SECRET=
+MONGO_URI=
+GITHUB_CLIENT_ID=
+GITHUB_CLIENT_SECRET=
+GITHUB_CALLBACK_URL=
+REDIS_PORT=
+REDIS_HOST=
+# CLIENT_URL=
+FRONTEND_URL=
 ```
