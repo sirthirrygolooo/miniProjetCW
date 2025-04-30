@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Chat Instantané</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    <nav>
+        <h2><span style="color:blueviolet">Bienvenue</span> sur Chat Instantané ! 👽</h2>
+        <h4>Votre pseudo :
+            <input id="username" type="text" placeholder="Votre pseudo" />
+        </h4>
+    </nav>
+    <ul id="messages"></ul>
+    <form id="form" action="">
+        <input id="input" autocomplete="off" placeholder="Entrez un message" /><button>Envoyer</button>
+        <button id="clear-btn">Effacer l'historique</button>
+        <button id="toggle-btn" class="disconnect-btn">Déconnecter</button>
+    </form>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="./js/script.js"></script>
+</body>
+</html>
