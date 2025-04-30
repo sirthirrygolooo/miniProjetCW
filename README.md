@@ -30,13 +30,15 @@ Le projet est organisé en deux parties :
 
 ---
 
-Ouvrez un terminal et exécutez les commandes suivantes pour cloner le projet et installer les dépendances.
+Ouvrez un terminal et exécutez les commandes suivantes pour installer les dépendances.
 
 ```bash
 cd frontend
 npm install
 npm run serve
 ```
+
+Ouvrez un autre terminal et exécutez les commandes suivantes pour installer les dépendances.
 
 ```bash
 cd backend
