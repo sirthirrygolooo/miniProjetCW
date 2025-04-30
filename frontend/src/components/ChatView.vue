@@ -45,12 +45,8 @@ export default {
   methods: {
     async fetchMessages() {
       try {
-        const response = await fetch('/api/messages', {
-          method: 'GET',
-          credentials: 'include',
-        });
-        const data = await response.json();
-        this.messages = data.messages;
+        console.log('Récupération des messages...');
+        // marche paaaaas
       } catch (error) {
         console.error('Erreur lors de la récupération des messages:', error);
       }

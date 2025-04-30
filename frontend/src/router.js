@@ -18,6 +18,7 @@ const routes = [
       });
   }},
   { path: '/login', component: Login },
+  { path: '/:pathMatch(.*)*', redirect: '/home' },
 ];
 
 const router = createRouter({

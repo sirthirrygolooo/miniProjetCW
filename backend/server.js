@@ -39,16 +39,6 @@ app.get('/', (req, res) => {
   res.json({ user: req.user || null });
 });
 
-app.get('/api/messages', async (req, res) => {
-  try {
-    const messages = await Message.find().populate('user', 'displayName').sort({ timestamp: 1 });
-    res.json({ messages });
-  } catch (error) {
-    console.error('Erreur lors de la récupération des messages:', error);
-    res.status(500).json({ error: 'Erreur lors de la récupération des messages' });
-  }
-});
-
 const io = new Server(server, {
   cors: {
     origin: ['http://localhost:5173', 'http://localhost:5001', process.env.FRONTEND_URL],
