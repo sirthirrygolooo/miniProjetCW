@@ -6,6 +6,7 @@ const passport = require('passport');
 const { createServer } = require('http');
 const { Server } = require('socket.io');
 const sharedSession = require('express-socket.io-session');
+const Message = require('./models/Message');
 
 const authRoutes = require('./routes/auth');
 require('./config/passport')(passport);
@@ -40,7 +41,8 @@ app.get('/', (req, res) => {
 
 const io = new Server(server, {
   cors: {
-    origin: 'http://localhost:5173',
+    origin: ['http://localhost:5173', 'http://localhost:5001'],
+    methods: ['GET', 'POST'],
     credentials: true,
   }
 });
@@ -60,8 +62,22 @@ io.on('connection', (socket) => {
 
   console.log(`WebSocket connecté: ${userId}`);
 
-  socket.on('chat message', (msg) => {
-    io.emit('chat message', { user: userId, msg });
+  socket.on('chat message', async (msg) => {
+    try {
+      const newMessage = new Message({
+        user: userId,
+        message: msg,
+      });
+      await newMessage.save();
+
+      const messages = await Message.find().populate('user', 'displayName').sort({ timestamp: 1 });
+
+      io.emit('chat message', {
+        messages,
+      });
+    } catch (err) {
+      console.error('Erreur lors de l\'envoi du message:', err);
+    }
   });
 });
 
