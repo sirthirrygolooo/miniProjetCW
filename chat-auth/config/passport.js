@@ -4,7 +4,6 @@ const mongoose = require('mongoose');
 const User = require('../models/User');
 const axios = require('axios');
 
-// Fonction pour rafraîchir le token
 async function refreshAccessToken(refreshToken) {
     try {
         const response = await axios.post('https://oauth2.googleapis.com/token', {
@@ -21,7 +20,6 @@ async function refreshAccessToken(refreshToken) {
     }
 }
 
-// Fonction pour vérifier l'expiration
 async function isTokenExpired(token) {
     try {
         const response = await axios.get(`https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${token}`);
@@ -32,7 +30,6 @@ async function isTokenExpired(token) {
     }
 }
 
-// Ajout des paramètres d'autorisation pour forcer l'obtention du refresh_token
 GoogleStrategy.prototype.authorizationParams = function () {
     return {
         access_type: 'offline',
@@ -56,7 +53,7 @@ module.exports = function (passport) {
                 }
 
                 if (refreshToken) {
-                    user.refreshToken = refreshToken; // stocker si fourni à nouveau
+                    user.refreshToken = refreshToken;
                 }
 
                 user.displayName = profile.displayName || user.displayName;
@@ -64,7 +61,6 @@ module.exports = function (passport) {
                 return done(null, user);
             }
 
-            // Nouveau user
             const newUser = new User({
                 googleId: profile.id,
                 displayName: profile.displayName || '',
