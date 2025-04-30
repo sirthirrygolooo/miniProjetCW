@@ -115,6 +115,9 @@ app.post('/register', async (req, res) => {
  *         application/json:
  *           schema:
  *             $ref: '#/components/schemas/User'
+ *           example:
+ *             email: "example@example.com"
+ *             password: "example"
  *     responses:
  *       200:
  *         description: Connexion réussie, token JWT retourné
@@ -171,6 +174,8 @@ const authenticateToken = (req, res, next) => {
  *                   description: L'email de l'utilisateur
  *       401:
  *         description: Token invalide ou expiré
+ *       400:
+ *         description: Veuillez vous connecter pour obtenir un token
  */
 app.get('/profile', authenticateToken, async (req, res) => {
     const result = await pool.query("SELECT email FROM users WHERE id = $1", [req.userId]);
