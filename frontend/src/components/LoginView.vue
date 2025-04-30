@@ -41,7 +41,7 @@ export default {
           console.log(data);
           if (data.user) {
             popup.close();
-            this.$router.push('/');
+            this.$router.push('/chat');
           } else {
             alert('Connexion échouée');
           }
