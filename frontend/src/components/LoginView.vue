@@ -44,7 +44,7 @@ export default {
 
           const data = await res.json();
           if (data.user) {
-            window.location.reload();
+            window.location.href = '/chat';
           } else {
             alert('Connexion échouée');
           }

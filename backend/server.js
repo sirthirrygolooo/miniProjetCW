@@ -28,7 +28,7 @@ app.use(sessionMiddleware);
 app.use(passport.initialize());
 app.use(passport.session());
 
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.error('MongoDB connection error:', err));
 
@@ -37,6 +37,16 @@ app.use('/auth', authRoutes);
 
 app.get('/', (req, res) => {
   res.json({ user: req.user || null });
+});
+
+app.get('/api/messages', async (req, res) => {
+  try {
+    const messages = await Message.find().populate('user', 'displayName').sort({ timestamp: 1 });
+    res.json({ messages });
+  } catch (error) {
+    console.error('Erreur lors de la récupération des messages:', error);
+    res.status(500).json({ error: 'Erreur lors de la récupération des messages' });
+  }
 });
 
 const io = new Server(server, {
