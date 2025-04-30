@@ -34,10 +34,10 @@ export default {
 
         if (data.token) {
           this.setToken(data.token);
-          localStorage.setItem('user', JSON.stringify({
-            email: this.email,
-            token: data.token
-          }));
+          // localStorage.setItem('user', JSON.stringify({
+          //   email: this.email,
+          //   token: data.token
+          // }));
           this.$router.push('/profile');
         } else {
           alert('Erreur de connexion');
