@@ -20,8 +20,27 @@ export default {
     };
   },
   created() {
-    this.socket = io({
-      auth: { username: localStorage.getItem('username') || 'Anonyme' },
+  fetch('http://localhost:3000/user', {
+      credentials: 'include',
+    })
+      .then(res => {
+        if (!res.ok) throw new Error('Non connecté');
+        return res.json();
+    })
+      .then(user => {
+        console.log('Connecté en tant que :', user.displayName || user.email);
+      })
+      .catch(err => {
+        console.warn('Utilisateur non connecté');
+        console.error(err);
+      });
+
+    this.socket = io({ withCredentials: true });
+  }
+,
+  mounted() {
+    this.socket = io('http://localhost:3000', {
+      withCredentials: true,
     });
 
     this.socket.on('chat message', (msg, sender, time) => {
@@ -37,12 +56,16 @@ export default {
       item.style.color = color;
       document.getElementById('messages').appendChild(item);
     });
+
+    this.socket.on('unauthorized', () => {
+      alert('Non autorisé, veuillez vous connecter.');
+      window.location.href = '/login';
+    });
   },
   methods: {
     sendMessage() {
-      if (this.message) {
-        const clientOffset = `${this.socket.id}-${Date.now()}`;
-        this.socket.emit('chat message', this.message, clientOffset);
+      if (this.message.trim()) {
+        this.socket.emit('chat message', this.message);
         this.message = '';
       }
     },
