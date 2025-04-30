@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <h2>Mon Profil</h2>
-    <p>Email: {{ email }}</p>
+  <div class="profile-container">
+    <h1>Mon Profil</h1>
+    <p>Email : {{ email }}</p>
   </div>
 </template>
 
@@ -24,3 +24,24 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #282828;
+  border-radius: 10px;
+}
+
+h1 {
+  color: #9C27B0;
+  margin-bottom: 20px;
+}
+
+p {
+  color: #E0E0E0;
+  font-size: 18px;
+}
+</style>
