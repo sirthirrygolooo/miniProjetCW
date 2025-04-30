@@ -66,9 +66,7 @@ nav li {
 }
 
 nav li:hover {
-  background-color: #444;
-  border-radius: 5px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  background-color: transparent;
 }
 
 nav a {
@@ -79,7 +77,7 @@ nav a {
 }
 
 nav a:hover {
-  transform: scale(1.05);
+  transform: scale(1.5);
   transition: all 0.3s ease;
 }
 
@@ -95,5 +93,8 @@ button {
 
 button:hover {
   background: #ff1f3f;
+  transform: scale(1.05);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 </style>
